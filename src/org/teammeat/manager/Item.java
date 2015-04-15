@@ -13,6 +13,16 @@ public class Item {
 		_amount = amount;
 	}
 	
+	//Incase we don't get the amount and just want to create basic item
+	public Item(int id, String name)
+	{
+		_id = id;
+		_name = name;
+		_amount = 0;
+	}
+	
+	//Getters
+	
 	public int getId()
 	{
 		return _id;
@@ -27,8 +37,8 @@ public class Item {
 	{
 		return _amount;
 	}
-	
-	//TODO Setters
+		
+	//Handling the amount variable
 	
 	public void setAmount(int newValue)
 	{

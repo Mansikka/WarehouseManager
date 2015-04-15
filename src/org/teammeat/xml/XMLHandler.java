@@ -33,8 +33,7 @@ public class XMLHandler {
 			builder = factory.newDocumentBuilder();
 			
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			System.out.println("ERROR: Failure to create XML handler");
+			System.out.println("ERROR: Error while creating XML handler");
 			System.out.println( e.toString() );
 			System.exit(5);
 			return;
@@ -46,35 +45,45 @@ public class XMLHandler {
 	public boolean validateDTD(Document xml, String dtd)
 	{
 
+		 if(debug)
+		{
+			 System.out.println("DEBUG: Starting validation using " + dtd + " DTD file");
+		}
+		
 		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		Source schemaFile = new StreamSource(new File(dtd));
 	    Schema schema;
 	    
 	    if(debug)
 	    {
-	    	System.out.println("DEBUG: Validating xml file");
+	    	System.out.println("DEBUG: Getting the DTD");
 	    }
+	    
+	    //TODO Figure out what goes wrong here
 	    
 		try {
 			schema = factory.newSchema(schemaFile);
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
+			System.out.println("DEBUG: Error while handling the DTD");
+			System.out.println(e.toString());
 			e.printStackTrace();
 			return false;
 		}
 		Validator validator = schema.newValidator();
 		
-		//TODO Do DTD validation
+		if(debug)
+		{
+			System.out.println("DEBUG: Validating xml file");
+		}
+		
 		try {
 			validator.validate(new DOMSource(xml));
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
 			System.out.println("ERROR: SAXException");
 			System.out.println( e.toString() );
 			e.printStackTrace();
 			return false;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("ERROR: IOException");
 			System.out.println( e.toString() );
 			e.printStackTrace();
@@ -89,14 +98,14 @@ public class XMLHandler {
 	{
 		if(debug)
 		{
-			System.out.println("DEBUG: Parsing file " + xmlFile);
+			System.out.println("DEBUG: Begining parsing operation for file " + xmlFile);
 		}
 		
 		File xmlSource = new File(xmlFile);
 		
 		if(!xmlSource.isFile())
 		{
-			System.out.println("ERROR: Given source file is not a file");
+			System.out.println("ERROR: Given source file is not an actual file");
 			System.exit(6);
 		}
 		
@@ -123,7 +132,7 @@ public class XMLHandler {
 			
 		} catch (IOException e) 
 		{
-			System.out.println("ERROR: IO failure");
+			System.out.println("ERROR: IO failure while parsing the document");
 			System.out.println( e.toString() );
 			e.printStackTrace();
 			doc = null;
@@ -134,7 +143,9 @@ public class XMLHandler {
 		{
 			System.out.println("DEBUG: File parsed, moving to validation");
 		}
-		
+		//TODO Fix validation
+		/*
+		 * 
 		String dtd = "Warehouse.dtd";
 		
 		if(type.equals("Company"))
@@ -142,7 +153,7 @@ public class XMLHandler {
 			dtd = "Company.dtd";
 		}
 		
-		/*
+		
 		if( !validateDTD( doc, dtd) )
 		{
 			System.out.println("ERROR: XML file is not a valid" );

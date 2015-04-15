@@ -6,7 +6,7 @@ public class Company {
 	
 	Company()
 	{
-		//TODO complete consturctor
+		//TODO complete constructor
 	}
 	
 	//TODO Everything

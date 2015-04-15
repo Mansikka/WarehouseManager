@@ -1,14 +1,17 @@
 PROGRAM USE
 Parameters 		-					Action						-	Implemented
--s <file>		-	Tells the program what source file to use	-	Yes
--d				-	Prints the debug information				-	Yes
--v				-	Prints out verbose output					-	No
+-s <file>		-	Tells the program what source file to use	-	YES
+-d				-	Prints the debug information				-	YES
+-v				-	Prints out verbose output					-	NO
 
 
 TODO
-Operation		-					Description					-	Implemnted
-Parameters		-	Program takes in parameters and acts on them-	In Progress
-Warehouse		-	Warehouse class								-	In Progress
-Company			-	Company class								-	Not Done
-XML parsing		-	Parsing XML file to produce content			-	In Progress
-XML validation	-	Validating XML file							-	Not Done
+Operation		-					Description					-	Status
+Parameters		-	Program takes in parameters and reads them	-	DONE
+Warehouse		-	Warehouse class								-	90%
+Company			-	Company class								-	0%
+Item			-	Item class										DONE
+XML parsing		-	Parsing XML file to produce content			-	90%
+XML validation	-	Validating XML file							-	50&
+Actions			-	Commiting correct actions					-	0%
+Output			-	Correct output based on input				-	0%
