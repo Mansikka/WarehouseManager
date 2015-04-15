@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE Company SYSTEM "Company.dtd">
+<company>
+	<info>
+		<name>SCP Foundation</name>
+		<manager>O5</manager>
+		<location>Classified</location>
+	</info>
+	<warehouses>
+		<warehouse file="Warehouse13.xml" />
+	</warehouses>
+	<actions>
+		<action type="sort" att="decending" />
+	</actions>
+</company>

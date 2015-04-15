@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE warehouse SYSTEM "Warehouse.dtd">
+<warehouse name="Warehouse 13">
+	<info>
+		<manager>Agent Black</manager>
+		<location>Area 51</location>
+	</info>
+	
+	<inbound>
+		<product>
+			<id>3</id>
+			<name>Arc of Covenant</name>
+			<amount>1</amount>
+		</product>
+	</inbound>
+	
+	<outbound>
+	</outbound>
+	
+	<storage> 
+		<product>
+			<id>4</id>
+			<name>Holy Grail</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>1</id>
+			<name>Excalibur</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>8</id>
+			<name>Dragons Teeth</name>
+			<amount>10</amount>
+		</product>
+		<product>
+			<id>22</id>
+			<name>Answer to Life, Universe and Everything</name>
+			<amount>42</amount>
+		</product>
+	</storage>
+</warehouse>

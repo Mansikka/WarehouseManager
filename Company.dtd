@@ -1,0 +1,22 @@
+<!-- Our root element, company.-->
+<!ELEMENT company (info, warehouses, actions)>
+
+<!-- Ijfo which contains data about company. -->
+<!ELEMENT info 		(name,  manager, location)>
+
+<!ELEMENT name 		(#PCDATA)>
+<!ELEMENT manager 	(#PCDATA)>
+<!ELEMENT location 	(#PCDATA)>
+
+<!-- Inbound are objects stated to arrive -->
+<!ELEMENT warehouses 	( warehouse+ )>
+
+<!ELEMENT warehouse EMPTY >
+<!ATTLIST warehouse file CDATA #REQUIRED >
+
+<!-- Our actions, if the program is upgraded, this can easily be expanded -->
+<!ELEMENT actions 	( action* )>
+
+<!ELEMENT action 	EMPTY>
+<!ATTLIST action type CDATA #REQUIRED >
+<!ATTLIST action att  CDATA #REQUIRED >
