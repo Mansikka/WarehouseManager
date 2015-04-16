@@ -3,13 +3,14 @@ Parameters 		-					Action						-	Implemented
 -s <file>		-	Tells the program what source file to use	-	YES
 -d				-	Prints the debug information				-	YES
 -v				-	Prints out verbose output					-	NO
+-w				-	Workfolder									-	NO
 
 
 TODO
 Operation		-					Description					-	Status
 Parameters		-	Program takes in parameters and reads them	-	DONE
-Warehouse		-	Warehouse class								-	90%
-Company			-	Company class								-	90%
+Warehouse		-	Warehouse class								-	DONE
+Company			-	Company class								-	DONE
 Item			-	Item class										DONE
 XML parsing		-	Parsing XML file to produce content			-	DONE
 XML validation	-	Validating XML file							-	DONE

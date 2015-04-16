@@ -9,6 +9,7 @@ import javax.xml.parsers.*;
 
 import java.io.*;
 
+import org.teammeat.manager.Item;
 import org.teammeat.manager.Warehouse;
 import org.teammeat.manager.Company;
 
@@ -149,12 +150,87 @@ public class XMLHandler {
 		
 		if(_debug)
 		{
-			System.out.println("DEBUG: Info collected, total of " + info.getLength());
+			System.out.println("DEBUG: Info collected, total of " + (info.getLength() - 1 - ( ( info.getLength() - 1) / 2 ) ) );
 			System.out.println("DEBUG: Warehouse manager: " + info.item(1).getTextContent()
 					+ ", location: " + info.item(3).getTextContent());
 		}
 		
 		Warehouse house = new Warehouse(info.item(1).getTextContent(), info.item(3).getTextContent());
+
+		NodeList inbound = root.getChildNodes().item(3).getChildNodes();
+		NodeList outbound = root.getChildNodes().item(5).getChildNodes();
+		NodeList storage = root.getChildNodes().item(7).getChildNodes();
+		
+		if(_debug)
+		{
+			System.out.println("DEBUG: Inbound items : " + (inbound.getLength() - 1 - ( ( inbound.getLength() - 1) / 2 ) ) );
+			System.out.println("DEBUG: Outbound items: " + (outbound.getLength() - 1 - ( ( outbound.getLength() - 1) / 2 ) ) );
+			System.out.println("DEBUG: Storage items : " + (storage.getLength() - 1 - ( ( storage.getLength() - 1) / 2 ) ) );
+		}
+		
+		
+		//We deal with the inbound items
+		for(int i = 1; i < inbound.getLength(); i += 2)
+		{
+			NodeList item = inbound.item(i).getChildNodes();
+			
+			int id 		= 	Integer.parseInt( item.item(1).getTextContent() );
+			String name = 	item.item(3).getTextContent();
+			int amount 	= 	Integer.parseInt( item.item(5).getTextContent() );
+			
+			if(_debug)
+			{
+				System.out.println("DEBUG: New Inbound item, id: " + id + ", name: " + name + ", amount: " + amount);
+			}
+			
+			Item object = new Item(id, name, amount );
+			
+			house.addInbound(object);
+		}
+		
+		//Same deal for outbound items
+		for(int i = 1; i < outbound.getLength(); i += 2)
+		{
+			NodeList item = outbound.item(i).getChildNodes();
+			
+			int id 		= 	Integer.parseInt( item.item(1).getTextContent() );
+			String name = 	item.item(3).getTextContent();
+			int amount 	= 	Integer.parseInt( item.item(5).getTextContent() );
+			
+			if(_debug)
+			{
+				System.out.println("DEBUG: New Outbound item, id: " + id + ", name: " + name + ", amount: " + amount);
+			}
+			
+			Item object = new Item(id, name, amount );
+			
+			house.addOutbound(object);
+		}
+		
+		
+		//And finally, stuff in storage
+		for(int i = 1; i < storage.getLength(); i += 2)
+		{
+			NodeList item = storage.item(i).getChildNodes();
+			
+			int id 		= 	Integer.parseInt( item.item(1).getTextContent() );
+			String name = 	item.item(3).getTextContent();
+			int amount 	= 	Integer.parseInt( item.item(5).getTextContent() );
+			
+			if(_debug)
+			{
+				System.out.println("DEBUG: New Storage item, id: " + id + ", name: " + name + ", amount: " + amount);
+			}
+			
+			Item object = new Item(id, name, amount );
+			
+			house.addStorage(object);
+		}
+		
+		if(_debug)
+		{
+			System.out.println("DEBUG: Generating warehouse complete");
+		}
 		
 		//TODO fill out details
 		
@@ -181,7 +257,7 @@ public class XMLHandler {
 		
 		if(_debug)
 		{
-			System.out.println("DEBUG: Info collected, total of " + info.getLength());
+			System.out.println("DEBUG: Info collected, total of " + (info.getLength() - 1 - ( ( info.getLength() - 1) / 2 ) ));
 			System.out.println("DEBUG: Warehouse name: " + info.item(1).getTextContent()
 					+ ", Manager: " + info.item(3).getTextContent()
 					+ ", Location: " + info.item(5).getTextContent());
