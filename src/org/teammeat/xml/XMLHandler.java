@@ -1,18 +1,16 @@
 package org.teammeat.xml;
 
 import org.w3c.dom.*;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
-import javax.xml.XMLConstants;
 import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.*;
 
 import java.io.*;
 
-//import java.io.File;
+import org.teammeat.manager.Warehouse;
+import org.teammeat.manager.Company;
 
 public class XMLHandler {
 
@@ -39,62 +37,28 @@ public class XMLHandler {
 			return;
 		}
 		
-		
-	}
-	
-	public boolean validateDTD(Document xml, String dtd)
-	{
+		builder.setErrorHandler(
+				new ErrorHandler() {
+			        public void warning(SAXParseException e) throws SAXException 
+			        {
+			        	System.out.println("WARNING : " + e.getMessage()); // do nothing
+			        }
 
-		 if(debug)
-		{
-			 System.out.println("DEBUG: Starting validation using " + dtd + " DTD file");
-		}
-		
-		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		Source schemaFile = new StreamSource(new File(dtd));
-	    Schema schema;
-	    
-	    if(debug)
-	    {
-	    	System.out.println("DEBUG: Getting the DTD");
-	    }
-	    
-	    //TODO Figure out what goes wrong here
-	    
-		try {
-			schema = factory.newSchema(schemaFile);
-		} catch (SAXException e) {
-			System.out.println("DEBUG: Error while handling the DTD");
-			System.out.println(e.toString());
-			e.printStackTrace();
-			return false;
-		}
-		Validator validator = schema.newValidator();
-		
-		if(debug)
-		{
-			System.out.println("DEBUG: Validating xml file");
-		}
-		
-		try {
-			validator.validate(new DOMSource(xml));
-		} catch (SAXException e) {
-			System.out.println("ERROR: SAXException");
-			System.out.println( e.toString() );
-			e.printStackTrace();
-			return false;
-		} catch (IOException e) {
-			System.out.println("ERROR: IOException");
-			System.out.println( e.toString() );
-			e.printStackTrace();
-			return false;
-		}
-		
-		
-		return true;
+			        public void error(SAXParseException e) throws SAXException 
+			        {
+			        	System.out.println("ERROR: " + e.getMessage());
+			        	throw e;
+			        }
+
+			        public void fatalError(SAXParseException e) throws SAXException 
+			        {
+			        	System.out.println("FATAL ERROR: " + e.getMessage());
+			            throw e;
+			        }
+			 });
 	}
 	
-	public Document parseDocument(String xmlFile, String type)
+	public Document parseDocument(String xmlFile)
 	{
 		if(debug)
 		{
@@ -125,15 +89,14 @@ public class XMLHandler {
 		} catch (SAXException e) 
 		{
 			System.out.println("ERROR: XML parser error");
-			System.out.println( e.toString() );
 			e.printStackTrace();
 			doc = null;
 			System.exit(7);
 			
-		} catch (IOException e) 
+		}
+		catch (IOException e) 
 		{
 			System.out.println("ERROR: IO failure while parsing the document");
-			System.out.println( e.toString() );
 			e.printStackTrace();
 			doc = null;
 			System.exit(7);
@@ -143,25 +106,26 @@ public class XMLHandler {
 		{
 			System.out.println("DEBUG: File parsed, moving to validation");
 		}
-		//TODO Fix validation
-		/*
-		 * 
-		String dtd = "Warehouse.dtd";
-		
-		if(type.equals("Company"))
-		{
-			dtd = "Company.dtd";
-		}
-		
-		
-		if( !validateDTD( doc, dtd) )
-		{
-			System.out.println("ERROR: XML file is not a valid" );
-			System.exit(8);
-		}
-		*/
 		
 		return doc;
+	}
+	
+	public Warehouse generateWarehouse(Document xml)
+	{
+		if(xml.getDoctype().toString() != "Warehouse")
+		{
+			System.out.println("ERROR: Incorrect doctype. Expected: Warehouse; received: " + xml.getDoctype().toString() );
+			return null;
+		}
+		//Node root = xml.getDocumentElement();
+		
+		//Node info = root.
+		//TODO get info
+		
+		Warehouse house = new Warehouse("Placeholder", "Placeholder", "Placeholder");
+		
+		//TODO fill out details
+		return house;
 	}
 	
 }

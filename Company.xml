@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<!DOCTYPE Company SYSTEM "Company.dtd">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE company SYSTEM "Company.dtd">
 <company>
 	<info>
 		<name>SCP Foundation</name>

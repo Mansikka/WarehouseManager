@@ -24,9 +24,13 @@ import org.teammeat.xml.XMLHandler;
 public class WarehouseManager {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Warehouse Manager 0.0.1");
+		
+		//Program variables
 		boolean debug = false;
+		boolean verbose = false;
+		
 		//We check that config file was given
 
 		String config = "";
@@ -50,6 +54,10 @@ public class WarehouseManager {
 				{
 					debug = true;
 				}
+				else if (args[i].toString().equals("-v"))
+				{
+					verbose = true;
+				}
 				else
 				{
 					System.out.println("ERROR: Unknown option " + args[i].toString());
@@ -63,6 +71,9 @@ public class WarehouseManager {
 		if(debug)
 		{
 			System.out.println("DEBUG: Debug messages activated");
+			System.out.println("DEBUG: config file is " +config);
+			System.out.println("DEBUG: Verbose messages is set " + verbose);
+			
 		}
 		
 		
@@ -102,7 +113,7 @@ public class WarehouseManager {
 		
 		XMLHandler handler = new XMLHandler(debug);
 		
-		Document doc = handler.parseDocument(config, "Company");
+		Document doc = handler.parseDocument(config);
 		
 		if(doc == null)
 		{
@@ -137,6 +148,9 @@ public class WarehouseManager {
 			System.out.println(output );
 		}
 		
+		//Warehouse test = handler.generateWarehouse(doc);
+		
+				
 		if(debug)
 		{
 			System.out.println("DEBUG: All operations carried out successfully, exiting software");

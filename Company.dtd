@@ -1,7 +1,7 @@
 <!-- Our root element, company.-->
 <!ELEMENT company (info, warehouses, actions)>
 
-<!-- Ijfo which contains data about company. -->
+<!-- Info which contains data about company. -->
 <!ELEMENT info 		(name,  manager, location)>
 
 <!ELEMENT name 		(#PCDATA)>
