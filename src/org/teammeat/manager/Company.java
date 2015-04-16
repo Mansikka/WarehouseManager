@@ -1,13 +1,85 @@
 package org.teammeat.manager;
 
+import java.util.Vector;
+
+import org.teammeat.manager.Warehouse;
+
 public class Company {
 
 	//TODO Member variables
+	private Vector<Warehouse> _warehouses;
 	
-	Company()
+	private String _name;
+	private String _manager;
+	private String _location;
+	
+	/**
+	 * Constructor 
+	 * @param name		Name
+	 * @param manager	Manager
+	 * @param location	Location
+	 */
+	public Company(String name, String manager, String location)
 	{
 		//TODO complete constructor
+		_name = name;
+		_manager = manager;
+		_location = location;
+		
+		_warehouses = new Vector<Warehouse>();
 	}
 	
-	//TODO Everything
+	//TODO Everything :/
+	
+	//Getters
+	public String getName()
+	{
+		return _name;
+	}
+	
+	public String getManager()
+	{
+		return _manager;
+	}
+	
+	public String getLocation()
+	{
+		return _location;
+	}
+	
+	/**
+	 * Adds new Warehouse to the company
+	 * @param addition	New Warehouse to add
+	 */
+	public void addWarehouse(Warehouse addition)
+	{
+		_warehouses.addElement(addition);
+	}
+	
+	/**
+	 * Returns list of warehouses
+	 * @return	List of warehouses
+	 */
+	public Vector<Warehouse> getWarehouse()
+	{
+		return _warehouses;
+	}
+	
+	/**
+	 * Gets the warehouse with the given name
+	 * @param location	Location of the warehouse
+	 * @return	Warehouse object or null if not found
+	 */
+	public Warehouse getWarehouse(String location)
+	{
+		for(int i = 0; i < _warehouses.size(); i++)
+		{
+			if( _warehouses.elementAt(i).getLocation().equals(location))
+			{
+				return _warehouses.elementAt(i);
+			}
+		}
+		
+		return null;
+	}
 }

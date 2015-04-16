@@ -9,9 +9,10 @@ TODO
 Operation		-					Description					-	Status
 Parameters		-	Program takes in parameters and reads them	-	DONE
 Warehouse		-	Warehouse class								-	90%
-Company			-	Company class								-	0%
+Company			-	Company class								-	90%
 Item			-	Item class										DONE
 XML parsing		-	Parsing XML file to produce content			-	DONE
 XML validation	-	Validating XML file							-	DONE
 Actions			-	Commiting correct actions					-	0%
 Output			-	Correct output based on input				-	0%
+XML to class	-	Produce classes from XML docs				-	0%;

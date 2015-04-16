@@ -35,39 +35,39 @@ public class WarehouseManager {
 
 		String config = "";
 		
-		if(args.length > 1)
+		//Check the arguments given to the program
+		for(int i = 0; i < args.length; i++)
 		{
-			for(int i = 0; i < args.length; i++)
+			System.out.print(args[i].toString() + " ");
+			
+			if(args[i].toString().equals("-s"))
 			{
-				System.out.print(args[i].toString() + " ");
-				
-				if(args[i].toString().equals("-s"))
+				i++;
+				if(i < args.length)
 				{
-					i++;
-					if(i < args.length)
-					{
-						config = args[i].toString();
-						System.out.print(config + " ");
-					}
-				}
-				else if(args[i].toString().equals("-d"))
-				{
-					debug = true;
-				}
-				else if (args[i].toString().equals("-v"))
-				{
-					verbose = true;
-				}
-				else
-				{
-					System.out.println("ERROR: Unknown option " + args[i].toString());
-					System.exit(-1);
+					config = args[i].toString();
+					System.out.print(config + " ");
 				}
 			}
-			
-			System.out.println("");
+			else if(args[i].toString().equals("-d"))
+			{
+				debug = true;
+			}
+			else if (args[i].toString().equals("-v"))
+			{
+				verbose = true;
+			}
+			else
+			{
+				System.out.println("ERROR: Unknown option " + args[i].toString());
+				System.exit(-1);
+			}
 		}
 		
+		//New line
+		System.out.println("");
+		
+		//Print the debug info
 		if(debug)
 		{
 			System.out.println("DEBUG: Debug messages activated");
@@ -78,7 +78,7 @@ public class WarehouseManager {
 		
 		
 		
-		//We get the config file
+		//Check the config file
 		if(config.equals(""))
 		{
 			System.out.println(error(1));
@@ -111,8 +111,10 @@ public class WarehouseManager {
 			System.out.println("DEBUG: Source file: " + config);
 		}
 		
-		XMLHandler handler = new XMLHandler(debug);
+		//Create the XMLHandler
+		XMLHandler handler = new XMLHandler(debug, verbose);
 		
+		//And parse the config file
 		Document doc = handler.parseDocument(config);
 		
 		if(doc == null)
@@ -148,7 +150,7 @@ public class WarehouseManager {
 			System.out.println(output );
 		}
 		
-		//Warehouse test = handler.generateWarehouse(doc);
+		Company test = handler.generateCompany(doc);
 		
 				
 		if(debug)
@@ -159,7 +161,11 @@ public class WarehouseManager {
 	}
 	
 	//PRIVATE
-	
+	/**
+	 * Prints out various error messages
+	 * @param e		Error cose
+	 * @return		Message
+	 */
 	private static String error(int e)
 	{
 		String message = "Undefined";
