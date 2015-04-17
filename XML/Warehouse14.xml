@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE warehouse SYSTEM "Warehouse.dtd">
+<warehouse name="Warehouse 14">
+	<info>
+		<manager>Johnson</manager>
+		<location>Utah</location>
+	</info>
+	
+	<inbound>
+		<product>
+			<id>100</id>
+			<name>Pack of Peanuts</name>
+			<amount>2</amount>
+		</product>
+	</inbound>
+	
+	<outbound>
+	</outbound>
+	
+	<storage> 
+		<product>
+			<id>99</id>
+			<name>Wizard Lizard</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>122</id>
+			<name>iPod 4th generation</name>
+			<amount>1000</amount>
+		</product>
+		<product>
+			<id>999</id>
+			<name>Coffee package</name>
+			<amount>2</amount>
+		</product>
+		<product>
+			<id>1007</id>
+			<name>THE Book</name>
+			<amount>0</amount>
+		</product>
+	</storage>
+</warehouse>

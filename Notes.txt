@@ -3,17 +3,23 @@ Parameters 		-					Action						-	Implemented
 -s <file>		-	Tells the program what source file to use	-	YES
 -d				-	Prints the debug information				-	YES
 -v				-	Prints out verbose output					-	NO
--w				-	Workfolder									-	NO
+-w				-	Sets the workfolder							-	YES
 
 
 TODO
 Operation		-					Description					-	Status
 Parameters		-	Program takes in parameters and reads them	-	DONE
-Warehouse		-	Warehouse class								-	DONE
-Company			-	Company class								-	DONE
+Warehouse		-	Warehouse class								-	80%
+Company			-	Company class								-	80%
 Item			-	Item class										DONE
 XML parsing		-	Parsing XML file to produce content			-	DONE
 XML validation	-	Validating XML file							-	DONE
 Actions			-	Commiting correct actions					-	0%
 Output			-	Correct output based on input				-	0%
 XML to class	-	Produce classes from XML docs				-	0%;
+
+ACTIONS
+Command			-					Description							-		Attributes		-	Status
+SORT			-	Sorts the stock either as ascending or decending	-	ASCENDING/DECENDING	-	Not Done
+SORTBY			-	Sorts the stock based on column (default is id)		-	ID/NAME/AMOUNT		-	Not Done
+LIST			-	List stock as either per warehouse or all			-	ALL/WAREHOUSE		-	Not Done

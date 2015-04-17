@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE company SYSTEM "Company.dtd">
+<company>
+	<info>
+		<name>Big Babylon's sheep Company Ltd</name>
+		<manager>Smithinson</manager>
+		<location>Utah</location>
+	</info>
+	<warehouses>
+		<warehouse file="Warehouse14.xml" />
+	</warehouses>
+	<actions>
+		<action type="sort" att="decending" />
+	</actions>
+</company>

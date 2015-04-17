@@ -30,6 +30,7 @@ public class WarehouseManager {
 		//Program variables
 		boolean debug = false;
 		boolean verbose = false;
+		String workfolder = "";
 		
 		//We check that config file was given
 
@@ -57,6 +58,19 @@ public class WarehouseManager {
 			{
 				verbose = true;
 			}
+			else if (args[i].toString().equals("-w"))
+			{
+				i++;
+				if(i < args.length)
+				{
+					workfolder = args[i].toString();
+					
+					if( !workfolder.endsWith("/") )
+					{
+						workfolder += "/";
+					}
+				}
+			}
 			else
 			{
 				System.out.println("ERROR: Unknown option " + args[i].toString());
@@ -73,8 +87,11 @@ public class WarehouseManager {
 			System.out.println("DEBUG: Debug messages activated");
 			System.out.println("DEBUG: config file is " +config);
 			System.out.println("DEBUG: Verbose messages is set " + verbose);
+			System.out.println("DEBUG: Workfolder is set as " + workfolder);
 			
 		}
+		
+		
 		
 		
 		
@@ -96,7 +113,7 @@ public class WarehouseManager {
 			System.exit(2);
 		}
 		
-		File configFile = new File(config);
+		File configFile = new File(workfolder + config);
 			
 		if(!configFile.isFile())
 		{
@@ -112,8 +129,11 @@ public class WarehouseManager {
 		}
 		
 		//Create the XMLHandler
-		XMLHandler handler = new XMLHandler(debug, verbose);
-		
+		XMLHandler handler = new XMLHandler(debug, verbose, workfolder);
+		if(verbose)
+		{
+			System.out.println("Begin operations");
+		}
 		//And parse the config file
 		Document doc = handler.parseDocument(config);
 		
@@ -150,12 +170,17 @@ public class WarehouseManager {
 			System.out.println(output );
 		}
 		
-		Company test = handler.generateCompany(doc);
+		handler.generateCompany(doc);
 		
 				
 		if(debug)
 		{
 			System.out.println("DEBUG: All operations carried out successfully, exiting software");
+		}
+		
+		if(verbose)
+		{
+			System.out.println("Exiting software");
 		}
 		System.exit(0);
 	}

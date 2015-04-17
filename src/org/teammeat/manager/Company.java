@@ -82,4 +82,16 @@ public class Company {
 		
 		return null;
 	}
+	
+	public Vector<Item> mergeInbound()
+	{
+		Vector <Item> inbounds = new Vector<Item>();
+		
+		for(int i = 0; i < _warehouses.size(); i++)
+		{
+			//Vector <Item> list = _warehouses.get(i);
+		}
+		
+		return inbounds;
+	}
 }

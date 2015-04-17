@@ -19,16 +19,18 @@ public class XMLHandler {
 	private DocumentBuilder _builder;
 	private boolean _debug;
 	private boolean _verbose;
+	private String _workfolder;
 	
 	/**
 	 * Constructor class
 	 * @param debug	Whenever or not debug mode is on/off
 	 * @param verbose	Whenever or not verbose mode is on/off
 	 */
-	public XMLHandler(boolean debug, boolean verbose)
+	public XMLHandler(boolean debug, boolean verbose, String workfolder)
 	{
 		this._debug = debug;
 		this._verbose = verbose;
+		this._workfolder = workfolder;
 		
 		_factory = DocumentBuilderFactory.newInstance();
 		
@@ -80,7 +82,7 @@ public class XMLHandler {
 			System.out.println("DEBUG: Begining parsing operation for file " + xmlFile);
 		}
 		
-		File xmlSource = new File(xmlFile);
+		File xmlSource = new File(_workfolder + xmlFile);
 		
 		if(!xmlSource.isFile())
 		{
@@ -151,11 +153,12 @@ public class XMLHandler {
 		if(_debug)
 		{
 			System.out.println("DEBUG: Info collected, total of " + (info.getLength() - 1 - ( ( info.getLength() - 1) / 2 ) ) );
-			System.out.println("DEBUG: Warehouse manager: " + info.item(1).getTextContent()
+			System.out.println("DEBUG: Warehouse name: " + root.getAttributes().item(0).getTextContent() 
+					+ ", manager: " + info.item(1).getTextContent()
 					+ ", location: " + info.item(3).getTextContent());
 		}
 		
-		Warehouse house = new Warehouse(info.item(1).getTextContent(), info.item(3).getTextContent());
+		Warehouse house = new Warehouse(root.getAttributes().item(0).getTextContent(), info.item(1).getTextContent(), info.item(3).getTextContent());
 
 		NodeList inbound = root.getChildNodes().item(3).getChildNodes();
 		NodeList outbound = root.getChildNodes().item(5).getChildNodes();
@@ -231,8 +234,11 @@ public class XMLHandler {
 		{
 			System.out.println("DEBUG: Generating warehouse complete");
 		}
-		
-		//TODO fill out details
+	
+		if(_verbose)
+		{
+			System.out.println("Parsed a warehouse " + house.getName());
+		}
 		
 		return house;
 	}
@@ -267,7 +273,6 @@ public class XMLHandler {
 				info.item(3).getTextContent(), 
 				info.item(5).getTextContent());
 		
-		//TODO fill out details
 		
 		//We get the Warehouses		
 		NodeList warehouses = root.getChildNodes().item(3).getChildNodes();
@@ -301,6 +306,11 @@ public class XMLHandler {
 		{
 			System.out.println("DEBUG: Generating company complete");
 			
+		}
+		
+		if(_verbose)
+		{
+			System.out.println("Parsed a company " + co.getName());
 		}
 		
 		return co;

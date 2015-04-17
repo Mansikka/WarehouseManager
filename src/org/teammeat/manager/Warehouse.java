@@ -1,6 +1,7 @@
 package org.teammeat.manager;
 
 import java.util.Vector;
+
 import org.teammeat.manager.Item;
 
 public class Warehouse {
@@ -9,12 +10,13 @@ public class Warehouse {
 	private Vector<Item> inbound;
 	private Vector<Item> outbound;
 	
-	
+	private String _name;
 	private String _manager;
 	private String _location;
 	
-	public Warehouse(String manager, String location)
+	public Warehouse(String name, String manager, String location)
 	{
+		_name = name;
 		_location = location;
 		_manager = manager;
 		
@@ -22,6 +24,11 @@ public class Warehouse {
 		inbound = new Vector<Item>();
 		outbound = new Vector<Item>();
 
+	}
+	
+	public String getName()
+	{
+		return _name;
 	}
 	
 	public String getLocation()
