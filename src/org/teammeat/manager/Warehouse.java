@@ -41,6 +41,21 @@ public class Warehouse {
 		return _manager;
 	}
 	
+	public Vector<Item> getInbound()
+	{
+		return inbound;
+	}
+	
+	public Vector<Item> getOutbound()
+	{
+		return outbound;
+	}
+	
+	public Vector<Item> getStorage()
+	{
+		return storage;
+	}
+	
 	public void addInbound(Item item)
 	{
 		if(item == null)

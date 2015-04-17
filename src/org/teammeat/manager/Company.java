@@ -67,14 +67,14 @@ public class Company {
 	
 	/**
 	 * Gets the warehouse with the given name
-	 * @param location	Location of the warehouse
+	 * @param 	name		Name of the warehouse
 	 * @return	Warehouse object or null if not found
 	 */
-	public Warehouse getWarehouse(String location)
+	public Warehouse getWarehouse(String name)
 	{
 		for(int i = 0; i < _warehouses.size(); i++)
 		{
-			if( _warehouses.elementAt(i).getLocation().equals(location))
+			if( _warehouses.elementAt(i).getName().equals(name))
 			{
 				return _warehouses.elementAt(i);
 			}
