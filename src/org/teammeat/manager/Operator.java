@@ -1,8 +1,5 @@
 package org.teammeat.manager;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 import org.teammeat.manager.Company;

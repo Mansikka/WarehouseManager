@@ -232,7 +232,7 @@ public class XMLHandler {
 		
 		if(_debug)
 		{
-			System.out.println("DEBUG: Generating warehouse complete");
+			System.out.println("DEBUG: Generating warehouse " + house.getName() + " complete");
 		}
 	
 		if(_verbose)
@@ -296,7 +296,7 @@ public class XMLHandler {
 			{
 				if(_debug)
 				{
-					System.out.println("DEBUG: Adding warehouse in " + house.getLocation() + " to " + co.getName() );
+					System.out.println("DEBUG: Adding warehouse " + house.getName() + " to " + co.getName() );
 				}
 				co.addWarehouse(house);
 			}

@@ -8,18 +8,18 @@ Project for university. Goal is to create a java program that handles XML files.
 ## Command line options:
 --------------------------
 
-0. -s <file> 	Sets a config file to be used. Must be company type XML file.
-0. -v			Sets verbose messages on. Prints more messages
-0. -d			Sets debug messages on. Prints debug info
-0. -w <path>	Sets workspace. All files will be searched from this location, including config file
+*. -s <file> 	Sets a config file to be used. Must be company type XML file.
+*. -v			Sets verbose messages on. Prints more messages
+*. -d			Sets debug messages on. Prints debug info
+*. -w <path>	Sets workspace. All files will be searched from this location, including config file
 
 ## Actions
 --------------------------
 
 Following actions are can be placed into config file. Unkown operations will be ignored.
 
-0. MERGE		Will merge all warehouse stocks into one file. Param tells which stock (INBOUND/OUTBOUND/STORAGE) are merged
-0. SORT			Sorts merged stock. Param tells whenever we want list to be ascending or decending based on id
+*. MERGE		Will merge all warehouse stocks into one file. Param tells which stock (INBOUND/OUTBOUND/STORAGE) are merged
+*. SORT			Sorts merged stock. Param tells whenever we want list to be ascending or decending based on id
 
 ## Notes
 --------------------------
