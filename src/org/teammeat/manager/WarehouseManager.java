@@ -20,7 +20,7 @@ public class WarehouseManager {
 	 */
 	public static void main(String[] args) {
 		
-		System.out.println("Warehouse Manager 0.0.1");
+		System.out.println("Warehouse Manager 1.0.0");
 		
 		//Program variables
 		boolean debug = false;

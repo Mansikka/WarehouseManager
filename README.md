@@ -5,6 +5,12 @@
 
 Project for university. Goal is to create a java program that handles XML files. It takes in one company type .xml configuration file, then prints out desired output on a comma separated values file (.csv) based on given actions in the company file.
 
+## How to run
+--------------------------
+
+On command line, type "java -jar WarehouseManager.jar <option" to run. For command line options, see below,
+
+
 ## Command line options:
 --------------------------
 

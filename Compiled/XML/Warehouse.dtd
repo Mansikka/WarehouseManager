@@ -1,0 +1,24 @@
+<!-- Our root element, warehouse.-->
+<!ELEMENT warehouse (info, inbound, outbound, storage)>
+<!ATTLIST warehouse name CDATA #REQUIRED >
+
+<!--Warehouse information -->
+<!ELEMENT info (manager, location)>
+
+<!ELEMENT manager (#PCDATA)>
+<!ELEMENT location (#PCDATA)>
+
+<!-- Inbound are objects stated to arrive -->
+<!ELEMENT inbound ( product* )>
+
+<!-- Outbound are objects stated to depart -->
+<!ELEMENT outbound ( product* )>
+
+<!-- Storage tells us current items in the storage -->
+<!ELEMENT storage ( product* )>
+
+<!-- Our items, each has id, name and amount in stated section -->
+<!ELEMENT product ( id, name, amount )>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT amount (#PCDATA)>
