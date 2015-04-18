@@ -16,12 +16,17 @@ public class Operator {
 	/**
 	 * Constructor
 	 */
-	public Operator(Company co, boolean debug, boolean verbose)
+	public Operator(boolean debug, boolean verbose)
 	{
 		operations = new Vector<Action>();
-		_co = co;
+		_co = null;
 		_debug = debug;
 		_verbose = verbose;
+	}
+	
+	public void setCompany(Company co)
+	{
+		_co = co;
 	}
 	
 	public void addActions(String action, String param)
@@ -33,12 +38,14 @@ public class Operator {
 		
 		operations.addElement(new Action(action, param));
 	}
+	
 	/**
 	 * Carries out acts given to it earlier. Will ignore commands that are not known
 	 */
 	public void act()
 	{
 		Vector<Item> result = null;
+		
 		for(int i = 0; i < operations.size(); i++)
 		{
 			String action = operations.elementAt(i).getAction();
@@ -57,6 +64,14 @@ public class Operator {
 				if(_verbose)
 				{
 					System.out.println("Sorting stock");
+				}
+				if(result == null)
+				{
+					if(_debug)
+					{
+						System.out.println("DEBUG: No stock to sort, creating one based on STORAGE");
+					}
+					result = mergeAll("STORAGE");
 				}
 				sort(result);
 				
@@ -78,9 +93,7 @@ public class Operator {
 	private Vector<Item> mergeAll(String stock)
 	{
 		Vector<Item> result = new Vector<Item>();
-		Vector <Warehouse> wares = _co.getWarehouse();
-		
-		
+		Vector <Warehouse> wares = _co.getWarehouse();	
 		
 		for(int i = 0; i < wares.size(); i++)
 		{
@@ -106,6 +119,15 @@ public class Operator {
 			result = combine(result, temp);
 		}
 		
+		if(_debug)
+		{
+			System.out.println("DEBUG: Merged stock:");
+			
+			for(int i = 0; i < result.size(); i++)
+			{
+				System.out.println("DEBUG: " + result.elementAt(i).getId() + ":" + result.elementAt(i).getName() + ":" + result.elementAt(i).getAmount() );
+			}
+		}
 		
 		return result;
 	}
@@ -118,6 +140,21 @@ public class Operator {
 	 */
 	private Vector<Item> combine(Vector<Item> list1, Vector<Item> list2)
 	{
+		if(_debug)
+		{
+			System.out.println("Combining two lists with " + list1.size() + " and " + list2.size() + " items");
+		}
+		
+		if(list1.size() == 0)
+		{
+			return list2;
+		}
+		
+		if(list2.size() == 0)
+		{
+			return list1;
+		}
+		
 		//We go through items in list2 one by one
 		for(int i = 0; i < list2.size(); i++)
 		{
@@ -141,8 +178,13 @@ public class Operator {
 	 */
 	private Vector<Item> sort(Vector<Item> list)
 	{
+		if(_debug)
+		{
+			System.out.println("DEBUG: Sorting list with " + list.size() + " elements");
+		}
+		
 		//If we have split the list to one by now, we return the list
-		if(list.size() == 1)
+		if(list.size() <= 1)
 		{
 			return list;
 		}

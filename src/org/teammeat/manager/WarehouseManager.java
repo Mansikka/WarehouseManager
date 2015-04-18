@@ -1,15 +1,6 @@
 package org.teammeat.manager;
 
 import java.io.File;
-import java.io.StringWriter;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 import org.teammeat.xml.XMLHandler;
@@ -143,35 +134,17 @@ public class WarehouseManager {
 			System.exit(8);
 		}
 		
+		Company co = handler.generateCompany(doc);
 		
+		Operator op = handler.generateActions(doc);
 		
-		if(debug)
+		if(op == null)
 		{
-			TransformerFactory tf = TransformerFactory.newInstance();
-			Transformer transformer = null;
-			try {
-				transformer = tf.newTransformer();
-			} catch (TransformerConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.exit(-2);
-			}
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			StringWriter writer = new StringWriter();
-			try {
-				transformer.transform(new DOMSource(doc), new StreamResult(writer));
-			} catch (TransformerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String output = writer.getBuffer().toString().replaceAll("\n|\r", "");
-			
-			System.out.println("DEBUG:");
-			System.out.println(output );
+			System.out.println("ERROR: Operator fail");
+			System.exit(12);
 		}
-		
-		handler.generateCompany(doc);
-		
+		op.setCompany(co);
+		op.act();
 				
 		if(debug)
 		{

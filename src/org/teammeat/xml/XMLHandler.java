@@ -10,6 +10,7 @@ import javax.xml.parsers.*;
 import java.io.*;
 
 import org.teammeat.manager.Item;
+import org.teammeat.manager.Operator;
 import org.teammeat.manager.Warehouse;
 import org.teammeat.manager.Company;
 
@@ -314,6 +315,40 @@ public class XMLHandler {
 		}
 		
 		return co;
+	}
+	
+	public Operator generateActions(Document xml)
+	{
+		Node root = xml.getDocumentElement();
+		
+		Operator op = new Operator(_debug, _verbose);
+		
+		NodeList actions = root.getChildNodes().item(5).getChildNodes();
+		
+		if(_debug)
+		{
+			for(int i = 1; i < actions.getLength(); i +=2)
+			{
+				Node temp = actions.item(i);
+				System.out.println("DEBUG: action: " + temp.getAttributes().getNamedItem("type").getTextContent() + ", param: " + temp.getAttributes().getNamedItem("att").getTextContent() );
+			}
+		}
+		
+		for(int i = 1; i < actions.getLength(); i +=2)
+		{
+			Node temp = actions.item(i);
+			String act = temp.getAttributes().getNamedItem("type").getTextContent();
+			String param = temp.getAttributes().getNamedItem("att").getTextContent();
+			
+			op.addActions(act.toUpperCase(), param.toUpperCase());
+		}
+		
+		if(_verbose)
+		{
+			System.out.println("Actions parsed");
+		}
+		
+		return op;
 	}
 	
 }

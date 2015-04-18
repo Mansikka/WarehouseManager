@@ -2,14 +2,16 @@
 <!DOCTYPE company SYSTEM "Company.dtd">
 <company>
 	<info>
-		<name>SCP Foundation</name>
-		<manager>O5</manager>
-		<location>Classified</location>
+		<name>Merger Corp</name>
+		<manager>Doc</manager>
+		<location>Street 5</location>
 	</info>
 	<warehouses>
 		<warehouse file="Warehouse13.xml" />
+		<warehouse file="Warehouse14.xml" />
 	</warehouses>
-	<actions>s
+	<actions>
+		<action type="merge" att="Storage" />
 		<action type="sort" att="decending" />
 	</actions>
 </company>
