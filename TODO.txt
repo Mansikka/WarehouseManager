@@ -4,6 +4,7 @@ Parameters 		-					Action						-	Implemented
 -d				-	Prints the debug information				-	YES
 -v				-	Prints out verbose output					-	YES
 -w				-	Sets the workfolder							-	YES
+-o				-	Sets the output file						-	ES
 
 
 TODO
@@ -14,12 +15,13 @@ Company			-	Company class								-	DONE
 Item			-	Item class										DONE
 XML parsing		-	Parsing XML file to produce content			-	DONE
 XML validation	-	Validating XML file							-	DONE
-Actions			-	Commiting correct actions					-	0%
-Output			-	Correct output based on input				-	0%
+Actions			-	Commiting correct actions					-	DONE
+Output			-	Correct output based on input				-	50%
 XML to class	-	Produce classes from XML docs				-	DONE
 
 ACTIONS
-Command			-					Description							-		Attributes		-	Status
-SORT			-	Sorts the stock either as ascending or decending	-	ASCENDING/DECENDING	-	DONE
-SORTBY			-	Sorts the stock based on column (default is id)		-	ID/NAME/AMOUNT		-	Not Done
-LIST			-	List stock as either per warehouse or all			-	ALL/WAREHOUSE		-	Not Done
+Command			-					Description							-		Attributes				-	Status
+MERGE			-	Merges stocks into single stock						-	INBOUND/OUTBOUND/STORAGE	-	DONE
+SORT			-	Sorts the stock either as ascending or decending	-	ASCENDING/DECENDING			-	DONE
+SORTBY			-	Sorts the stock based on column (default is id)		-	ID/NAME/AMOUNT				-	Not Done
+LIST			-	List stock as either per warehouse or all			-	ALL/WAREHOUSE				-	Not Done

@@ -26,10 +26,11 @@ public class WarehouseManager {
 		boolean debug = false;
 		boolean verbose = false;
 		String workfolder = "";
+		String output = "output.csv";
+		String config = "";
 		
 		//We check that config file was given
 
-		String config = "";
 		
 		//Check the arguments given to the program
 		for(int i = 0; i < args.length; i++)
@@ -64,6 +65,17 @@ public class WarehouseManager {
 					{
 						workfolder += "/";
 					}
+					
+					System.out.print(workfolder + " ");
+				}
+			}
+			else if (args[i].toString().equals("-o"))
+			{
+				i++;
+				if(i < args.length)
+				{
+					output = args[i].toString();
+					System.out.print(output + " ");
 				}
 			}
 			else
@@ -83,6 +95,7 @@ public class WarehouseManager {
 			System.out.println("DEBUG: config file is " +config);
 			System.out.println("DEBUG: Verbose messages is set " + verbose);
 			System.out.println("DEBUG: Workfolder is set as " + workfolder);
+			System.out.println("DEBUG: Output file is set as " + output);
 			
 		}
 		
@@ -148,6 +161,8 @@ public class WarehouseManager {
 			System.exit(12);
 		}
 		op.setCompany(co);
+		op.setOutput(output);
+		
 		op.act();
 				
 		if(debug)

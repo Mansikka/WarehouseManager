@@ -1,5 +1,10 @@
 package org.teammeat.manager;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Vector;
 
 import org.teammeat.manager.Company;
@@ -12,9 +17,12 @@ public class Operator {
 	private Company _co;
 	private boolean _debug;
 	private boolean _verbose;
+	private String _outputfile;
 	
 	/**
 	 * Constructor
+	 * @param debug
+	 * @param verbose
 	 */
 	public Operator(boolean debug, boolean verbose)
 	{
@@ -22,6 +30,7 @@ public class Operator {
 		_co = null;
 		_debug = debug;
 		_verbose = verbose;
+		_outputfile = "output.csv";
 	}
 	
 	/**
@@ -31,6 +40,19 @@ public class Operator {
 	public void setCompany(Company co)
 	{
 		_co = co;
+	}
+
+	/**
+	 * Sets output file
+	 * @param output	Output file
+	 */
+	public void setOutput(String output)
+	{
+		if(_debug)
+		{
+			System.out.println("DEBUG: Output file set to " + output);
+		}
+		_outputfile = output;
 	}
 	
 	/**
@@ -94,6 +116,8 @@ public class Operator {
 			printStock(result);
 			
 		}
+		
+		export(result);
 		
 		
 	}
@@ -396,6 +420,36 @@ public class Operator {
 		{
 			System.out.println(lines.get(i));
 		}
+	}
+	
+	private void export(Vector<Item> stock)
+	{
+		PrintWriter writer = null;
+
+		
+		try {
+			writer = new PrintWriter(_outputfile, "UTF-8");
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			System.out.println("ERROR: Error while creating output file " + _outputfile);
+			e.printStackTrace();
+			System.exit(13);
+		}
+		
+		if(writer == null)
+		{
+			System.out.println("ERROR: Error while creating writer");
+			System.exit(14);
+		}
+		
+		writer.println("id;name;amount");
+		
+		for(int i = 0; i < stock.size(); i++)
+		{
+			Item object = stock.get(i);
+			writer.println(Integer.toString(object.getId()) + ";" + object.getName() + ";" + Integer.toString(object.getAmount()) );			
+		}
+		writer.flush();
+		writer.close();
 	}
 	
 	/**

@@ -11,7 +11,8 @@ Project for university. Goal is to create a java program that handles XML files.
 * -s <file> 	Sets a config file to be used. Must be company type XML file.
 * -v			Sets verbose messages on. Prints more messages
 * -d			Sets debug messages on. Prints debug info
-* -w <path>	Sets workspace. All files will be searched from this location, including config file
+* -w <path>		Sets workspace. All files will be searched from this location, including config file
+* -o <filename>	Sets output file. Default is "output.csv"
 
 ## Actions
 --------------------------
