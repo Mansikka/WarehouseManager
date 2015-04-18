@@ -90,8 +90,12 @@ public class Operator {
 		
 		if(_verbose)
 		{
-			System.out.println("All actions carried out");
+			System.out.println("Resulting stock:");
+			printStock(result);
+			
 		}
+		
+		
 	}
 	
 	/**
@@ -294,7 +298,142 @@ public class Operator {
 		//Before we send the result back, we do sorting to it
 		return sort(result, order);
 	}
+
+	/**
+	 * Prints out the stock
+	 * @param stock	Stock as vector
+	 */
+	private void printStock(Vector<Item> stock)
+	{
+		//First, calculate space needed for each section
+		int idSpace = 0;
+		int nameSpace = 0;
+		int amountSpace = 6;
+		
+		for(int i = 0; i < stock.size(); i++)
+		{
+			Item test = stock.get(i);
+			
+			
+			if(Integer.toString( test.getId() ).length() > idSpace)
+			{
+				idSpace = Integer.toString( test.getId() ).length();
+				if(_debug)
+				{
+					System.out.println("DEBUG: New idSpace: " + idSpace);
+				}
+			}
+			
+			
+			if(test.getName().length() > nameSpace)
+			{
+				nameSpace = test.getName().length();
+				if(_debug)
+				{
+					System.out.println("DEBUG: New nameSpace: " + nameSpace);
+				}
+			}
+			
+			if(Integer.toString( test.getAmount() ).length() > amountSpace)
+			{
+				amountSpace = Integer.toString( test.getAmount() ).length();
+				if(_debug)
+				{
+					System.out.println("DEBUG: New amountSpace: " + amountSpace);
+				}
+			}
+			
+		}
+		
+		if(_debug)
+		{
+			System.out.println("DEBUG: ID length | Name length | Amount legnth");
+			System.out.println("DEBUG: " + idSpace + " | " + nameSpace + " | " + amountSpace);
+		}
+		
+		//Header string
+		String header = addSpace( idSpace/2 - 1);
+		header += "ID";
+		header += addSpace( idSpace/2 - 1);
+		header += " | ";
+		header += addSpace( nameSpace/2 - 2);
+		header += "NAME";
+		header += addSpace( nameSpace/2 - 1);
+		header += " | ";
+		header += addSpace( amountSpace/2 - 3);
+		header += "AMOUNT";
+		
+		//Divider string
+		String divider = addLine(idSpace);
+		divider += " | ";
+		divider += addLine(nameSpace);
+		divider += " | ";
+		divider += addLine(amountSpace);
+
+		
+		//Lines for the items
+		Vector<String> lines = new Vector<String>();
+		for(int i = 0; i < stock.size(); i++)
+		{
+			Item object = stock.get(i);
+			String line = "";
+			line += Integer.toString( object.getId() );
+			line += addSpace(idSpace - Integer.toString( object.getId() ).length() );
+			line += " | ";
+			line += object.getName();
+			line += addSpace(nameSpace - object.getName().length() );
+			line += " | ";
+			line += Integer.toString( object.getAmount() );
+			lines.add(line);
+			
+			
+		}
+		
+		//Print the stock
+		System.out.println(header);
+		System.out.println( divider  );
+		for(int i = 0; i < lines.size(); i++)
+		{
+			System.out.println(lines.get(i));
+		}
+	}
 	
+	/**
+	 * Returns string with the number of spaces
+	 * @param number	How many spaces are wanted
+	 * @return			String of spaces
+	 */
+	private String addSpace(int number)
+	{
+		String space = "";
+		if(_debug)
+		{
+			System.out.println("DEBUG: Adding " + number + " spaces");
+		}
+		for(int i = 0; i < number; i++)
+		{
+			space += " ";
+		}
+		
+		return space;
+	}
+	
+	/**
+	 * Returns string with the number of lines
+	 * @param number	How many lines are wanted
+	 * @return			String of lines
+	 */
+	private String addLine(int number)
+	{
+		String space = "";
+		
+		for(int i = 0; i < number; i++)
+		{
+			space += "-";
+		}
+		
+		return space;
+	}
 	
 	/**
 	 *	Action container 
