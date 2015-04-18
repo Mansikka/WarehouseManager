@@ -12,6 +12,6 @@
 	</warehouses>
 	<actions>
 		<action type="merge" att="Storage" />
-		<action type="sort" att="decending" />
+		<action type="sort" att="ascending" />
 	</actions>
 </company>

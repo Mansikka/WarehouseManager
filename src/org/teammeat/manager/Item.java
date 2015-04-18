@@ -6,6 +6,12 @@ public class Item {
 	String _name;
 	int	_amount;
 	
+	/**
+	 * Constructor with starting amount
+	 * @param id		Item ID
+	 * @param name		Item name
+	 * @param amount	The amount of items
+	 */
 	public Item(int id, String name, int amount)
 	{
 		_id = id;
@@ -13,7 +19,11 @@ public class Item {
 		_amount = amount;
 	}
 	
-	//Incase we don't get the amount and just want to create basic item
+	/**
+	 * Constructor with no starting amount (0)
+	 * @param id		Item ID
+	 * @param name		Item name
+	 */
 	public Item(int id, String name)
 	{
 		_id = id;

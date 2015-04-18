@@ -14,6 +14,12 @@ public class Warehouse {
 	private String _manager;
 	private String _location;
 	
+	/**
+	 * Constructor 
+	 * @param name		Warehouse name
+	 * @param manager	Warehouse manage
+	 * @param location	Warehouse location
+	 */
 	public Warehouse(String name, String manager, String location)
 	{
 		_name = name;
@@ -121,6 +127,4 @@ public class Warehouse {
 		//Item was not on the outbound list, so we add it to the list.
 		storage.add(item);
 	}
-	
-	//TODO remove functions, getters
 }

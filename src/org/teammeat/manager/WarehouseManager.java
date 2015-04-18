@@ -14,6 +14,10 @@ import org.teammeat.xml.XMLHandler;
 
 public class WarehouseManager {
 
+	/**
+	 * Main function that is run when program is run
+	 * @param args		Program parameters
+	 */
 	public static void main(String[] args) {
 		
 		System.out.println("Warehouse Manager 0.0.1");

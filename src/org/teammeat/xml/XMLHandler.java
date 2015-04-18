@@ -244,6 +244,11 @@ public class XMLHandler {
 		return house;
 	}
 	
+	/**
+	 * Generates Company class from given XML document
+	 * @param xml	XML Document
+	 * @return		Company class, returns null in case of error
+	 */
 	public Company generateCompany(Document xml)
 	{
 		if(!xml.getDoctype().getName().equals("company"))
@@ -317,6 +322,12 @@ public class XMLHandler {
 		return co;
 	}
 	
+	
+	/**
+	 * Generates Operator class from given XML document,
+	 * @param xml	XML Document
+	 * @return		Operator class, returns null in case of error
+	 */
 	public Operator generateActions(Document xml)
 	{
 		Node root = xml.getDocumentElement();

@@ -24,11 +24,20 @@ public class Operator {
 		_verbose = verbose;
 	}
 	
+	/**
+	 * Sets the company that is going to be target of operations
+	 * @param co	Company to be used
+	 */
 	public void setCompany(Company co)
 	{
 		_co = co;
 	}
 	
+	/**
+	 * Adds new action to the action que
+	 * @param action	Action name
+	 * @param param		Action parameter
+	 */
 	public void addActions(String action, String param)
 	{
 		if(_debug)
@@ -73,7 +82,7 @@ public class Operator {
 					}
 					result = mergeAll("STORAGE");
 				}
-				sort(result);
+				sort(result, param);
 				
 			}
 			
@@ -176,7 +185,7 @@ public class Operator {
 	 * @param list	List given
 	 * @return		Sorted list
 	 */
-	private Vector<Item> sort(Vector<Item> list)
+	private Vector<Item> sort(Vector<Item> list, String order)
 	{
 		if(_debug)
 		{
@@ -192,29 +201,52 @@ public class Operator {
 		Vector<Item> result = new Vector<Item>();
 		
 		
-		Vector<Item> list1 = split(list, 0, list.size() / 2);
-		Vector<Item> list2 = split(list, list.size() / 2, list.size());
+		Vector<Item> list1 = split(list, order, 0, list.size() / 2);
+		Vector<Item> list2 = split(list, order, list.size() / 2, list.size());
 		
 		//while both lists have elements, keep comparing and merging them
 		while(list1.size() > 0 && list2.size() > 0)
 		{
-			if( list1.get(0).getId() >= list2.get(0).getId() )
+			if(order.equals("DECENDING"))
 			{
-				if(_debug)
+				if( list1.get(0).getId() >= list2.get(0).getId() )
 				{
-					System.out.println("DEBUG: Merging from list1 item " + list1.get(0).getId() + ":" + list1.get(0).getName()  );
+					if(_debug)
+					{
+						System.out.println("DEBUG: Merging from list1 item " + list1.get(0).getId() + ":" + list1.get(0).getName()  );
+					}
+					result.add( list1.get(0) );
+					list1.remove(0);
 				}
-				result.add( list1.get(0) );
-				list1.remove(0);
+				else
+				{
+					if(_debug)
+					{
+						System.out.println("DEBUG: Merging from list2 item " + list1.get(0).getId() + ":" + list1.get(0).getName()  );
+					}
+					result.add( list2.get(0) );
+					list2.remove(0);
+				}
 			}
-			else
-			{
-				if(_debug)
+			else {
+				if( list1.get(0).getId() <= list2.get(0).getId() )
 				{
-					System.out.println("DEBUG: Merging from list2 item " + list1.get(0).getId() + ":" + list1.get(0).getName()  );
+					if(_debug)
+					{
+						System.out.println("DEBUG: Merging from list1 item " + list1.get(0).getId() + ":" + list1.get(0).getName()  );
+					}
+					result.add( list1.get(0) );
+					list1.remove(0);
 				}
-				result.add( list2.get(0) );
-				list2.remove(0);
+				else
+				{
+					if(_debug)
+					{
+						System.out.println("DEBUG: Merging from list2 item " + list1.get(0).getId() + ":" + list1.get(0).getName()  );
+					}
+					result.add( list2.get(0) );
+					list2.remove(0);
+				}
 			}
 		}
 		
@@ -242,7 +274,15 @@ public class Operator {
 		return result;
 	}
 	
-	private Vector<Item> split(Vector<Item> list, int low, int high)
+	/**
+	 * Splits vector by taking objects starting from low to high, then returning the resulting list
+	 * @param list		Vector to split
+	 * @param order		Ascending or decending order, passed to sort
+	 * @param low		Starting point
+	 * @param high		End point
+	 * @return			Resulting vector which is then sorted
+	 */
+	private Vector<Item> split(Vector<Item> list, String order, int low, int high)
 	{
 		Vector<Item> result = new Vector<Item>();
 		
@@ -252,11 +292,13 @@ public class Operator {
 		}
 		
 		//Before we send the result back, we do sorting to it
-		return sort(result);
+		return sort(result, order);
 	}
 	
 	
-	
+	/**
+	 *	Action container 
+	 */
 	public class Action
 	{
 		private String _action;
