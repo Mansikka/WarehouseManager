@@ -354,6 +354,8 @@ public class XMLHandler {
 			op.addActions(act.toUpperCase(), param.toUpperCase());
 		}
 		
+		op.sortActions();
+		
 		if(_verbose)
 		{
 			System.out.println("Actions parsed");

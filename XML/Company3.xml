@@ -11,7 +11,7 @@
 		<warehouse file="Warehouse14.xml" />
 	</warehouses>
 	<actions>
-		<act type="merge" att="Storage" />
 		<act type="sort" att="ascending" />
+		<act type="merge" att="Storage" />
 	</actions>
 </company>

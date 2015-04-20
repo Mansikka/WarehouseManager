@@ -65,6 +65,18 @@ public class Operator {
 			System.out.println("DEBUG: Adding new action " + action + " with param " + param);
 		}
 		
+		//Check for duplicates
+		for(int i = 0; i < operations.size(); i++)
+		{
+			Action check = operations.elementAt(i);
+			
+			//Both action AND parameter are the same, return and don't save it since it is a duplicate order
+			if(check.getAction().equals(action) && check.getParam().equals(param))
+			{
+				return;
+			}
+		}
+		
 		operations.addElement(new Action(action, param));
 	}
 	
@@ -485,6 +497,68 @@ public class Operator {
 		}
 		
 		return space;
+	}
+	
+	/**
+	 * Fuction that sorts the action list into correct order
+	 */
+	public void sortActions()
+	{
+		if(_debug)
+		{
+			System.out.println("DEBUG: Sorting actions");
+			System.out.println("DEBUG: unsorted action list:");
+			
+			for(int i = 0; i < operations.size(); i++)
+			{
+				Action act = operations.get(i);
+				System.out.println("DEBUG: " + i + ": " + act.getAction() + ", " + act.getParam() );
+			}
+		}
+		
+		Vector<String> priority = new Vector<String>();
+		priority.add("MERGE");
+		priority.add("SORT");
+		
+		Vector<Action> sorted = new Vector<Action>();
+		
+		//Go check the orders in the order of priority and add them to sorted list
+		//This has side effect of removing all non-supported orders
+		for(int i = 0; i < priority.size(); i++)
+		{
+			String act = priority.get(i);
+			
+			for(int j = 0; j < operations.size(); j++)
+			{
+				Action test = operations.elementAt(j);
+				
+				//If the action is same as current priority order, add it to to-be-done list
+				if( test.getAction().equals(act) )
+				{
+					if(_debug)
+					{
+						System.out.println("DEBUG: Added action " + test.getAction() + " with param " + test.getParam());
+					}
+					sorted.add(test);
+				}
+			}
+		}
+		
+		
+		//And we replace the operations list with new sorted list
+		operations = sorted;
+		
+		if(_debug)
+		{
+			System.out.println("DEBUG: Sorted action list:");
+			
+			for(int i = 0; i < operations.size(); i++)
+			{
+				Action act = operations.get(i);
+				System.out.println("DEBUG: " + i + ": " + act.getAction() + ", " + act.getParam() );
+			}
+		}
+		
 	}
 	
 	/**
