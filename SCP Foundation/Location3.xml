@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE warehouse SYSTEM "Warehouse.dtd">
+<warehouse name="Biological Containment Site-66">
+	<info>
+		<manager>Mr. Anderson</manager>
+		<location>Bio-Site-66</location>
+	</info>
+	
+	<inbound>
+	</inbound>
+	
+	<outbound>
+		<product>
+			<id>12</id>
+			<name>SCP-806</name>
+			<amount>3</amount>
+		</product>
+	</outbound>
+	
+	<storage> 
+		<product>
+			<id>9</id>
+			<name>SCP-478</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>10</id>
+			<name>SCP-569</name>
+			<amount>6</amount>
+		</product>
+		<product>
+			<id>11</id>
+			<name>SCP-646</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>12</id>
+			<name>SCP-806</name>
+			<amount>2</amount>
+		</product>		
+		<product>
+			<id>13</id>
+			<name>SCP-886</name>
+			<amount>1</amount>
+		</product>		
+		<product>
+			<id>14</id>
+			<name>SCP-1479</name>
+			<amount>2</amount>
+		</product>
+	</storage>
+</warehouse>

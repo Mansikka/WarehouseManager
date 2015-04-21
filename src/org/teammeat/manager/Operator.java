@@ -16,6 +16,7 @@ public class Operator {
 	private boolean _debug;
 	private boolean _verbose;
 	private String _outputfile;
+	private String storage;
 	
 	/**
 	 * Constructor
@@ -29,6 +30,7 @@ public class Operator {
 		_debug = debug;
 		_verbose = verbose;
 		_outputfile = "output.csv";
+		storage = "STORAGE";
 	}
 	
 	/**
@@ -92,13 +94,38 @@ public class Operator {
 			String action = operations.elementAt(i).getAction();
 			String param = operations.elementAt(i).getParam();
 			
+			if(_debug)
+			{
+				System.out.println("DEBUG: Current action:" + action + ", " + param);
+			}
+			
 			if( action.equals("MERGE"))
 			{
 				if(_verbose)
 				{
 					System.out.println("Merging stocks");
 				}
+				storage = param;
 				result = mergeAll(param);
+			}
+			else if( action.equals("CHECKIF") )
+			{
+				if(_verbose)
+				{
+					System.out.println("Checking stock");
+				}
+				
+				if(result == null)
+				{
+					if(_debug)
+					{
+						System.out.println("DEBUG: No stock to sort, creating one based on STORAGE");
+					}
+					result = mergeAll("STORAGE");
+				}
+				
+				result = check(result, param);
+				
 			}
 			else if( action.equals("SORT") )
 			{
@@ -159,7 +186,7 @@ public class Operator {
 			}
 			else
 			{
-				System.out.println("ERROR: Unknown storage");
+				System.out.println("ERROR: Unknown storage " + stock);
 				System.exit(11);
 			}
 			
@@ -187,10 +214,6 @@ public class Operator {
 	 */
 	private Vector<Item> combine(Vector<Item> list1, Vector<Item> list2)
 	{
-		if(_debug)
-		{
-			System.out.println("Combining two lists with " + list1.size() + " and " + list2.size() + " items");
-		}
 		
 		if(list1.size() == 0)
 		{
@@ -205,13 +228,20 @@ public class Operator {
 		//We go through items in list2 one by one
 		for(int i = 0; i < list2.size(); i++)
 		{
+			boolean found = false;
 			//We check the items against items on the list1
 			for(int j = 0; j < list1.size(); j++)
 			{
 				if( list1.get(j).getId() == list2.get(i).getId() )
 				{
 					list1.get(j).addAmount( list2.get(i).getAmount() );
+					found = true;
 				}
+			}
+			
+			if(!found)
+			{
+				list1.add( list2.get(i) );
 			}
 		}
 		
@@ -432,6 +462,207 @@ public class Operator {
 		}
 	}
 	
+	/**
+	 * Function checks if the results of merge are avaible
+	 * @param list		List to check
+	 * @param target	Are we dealing with outbound, inbound or storage items
+	 * @return
+	 */
+	private Vector<Item> check(Vector<Item> list, String target)
+	{
+		Vector<Item> result = new Vector<Item>();
+		boolean avaible = true;
+
+		
+		if(target.equals("MISSING"))
+		{
+			avaible = false;
+		}
+		
+		if(_debug)
+		{
+			System.out.println("DEBUG: Checking if items " + target + " for " + storage);
+		}
+		
+		if(storage.equals("OUTBOUND"))
+		{
+			Vector<Item> inStorage = mergeAll("STORAGE");
+			
+			if(_debug)
+			{
+				System.out.println("DEBUG: Checking if enough items in storage"	);
+			}
+			
+			for(int i = 0; i < list.size(); i++)
+			{
+				Item testItem = list.get(i);
+				boolean checked = false;
+				for(int j = 0; j < inStorage.size(); j++)
+				{
+					Item compare = inStorage.get(j);
+					
+					if(compare.getId() == testItem.getId())
+					{
+						if(_debug)
+						{
+							System.out.println("DEBUG: Item located, testing");
+						}
+						if(avaible)
+						{
+							
+							if(testItem.getAmount() < compare.getAmount())
+							{
+								if(_debug)
+								{
+									System.out.println("DEBUG: Enough items");
+								}
+								result.add( testItem );
+							}
+						}
+						else
+						{
+							if(testItem.getAmount() > compare.getAmount())
+							{
+								if(_debug)
+								{
+									System.out.println("DEBUG: Not enough items");
+								}
+								result.add(testItem);
+								
+							}
+							
+						}
+						
+						checked = true;
+					}
+				}
+				
+				if(!checked)
+				{
+					result.add( testItem );
+				}
+			}
+			
+			
+		}
+		else if(storage.equals("INBOUND"))
+		{
+			Vector<Item> inStorage = mergeAll("OUTBOUND");
+			
+			if(_debug)
+			{
+				System.out.println("DEBUG: Checking if enough items in outbounds"	);
+			}
+			
+			for(int i = 0; i < list.size(); i++)
+			{
+				Item testItem = list.get(i);
+				boolean checked = false;
+				for(int j = 0; j < inStorage.size(); j++)
+				{
+					Item compare = inStorage.get(j);
+					
+					if(compare.getId() == testItem.getId())
+					{
+						if(avaible)
+						{
+							if(testItem.getAmount() < compare.getAmount())
+							{
+								if(_debug)
+								{
+									System.out.println("DEBUG: Not enough items");
+								}
+								result.add( testItem );
+							}
+						}
+						else
+						{
+							if(testItem.getAmount() > compare.getAmount())
+							{
+								if(_debug)
+								{
+									System.out.println("DEBUG: Not enough items");
+								}
+								result.add(testItem);
+								
+							}
+							
+						}
+						
+						checked = true;
+					}
+				}
+				
+				if(!checked)
+				{
+					result.add( testItem );
+				}
+			}
+		}
+		else
+		{
+			
+			Vector<Item> inStorage = mergeAll("OUTBOUND");
+			
+			if(_debug)
+			{
+				System.out.println("DEBUG: Checking if enough items in outbounds"	);
+			}
+			
+			for(int i = 0; i < list.size(); i++)
+			{
+				Item testItem = list.get(i);
+				boolean checked = false;
+				for(int j = 0; j < inStorage.size(); j++)
+				{
+					Item compare = inStorage.get(j);
+					
+					if(compare.getId() == testItem.getId())
+					{
+						if(avaible)
+						{
+							if(testItem.getAmount() < compare.getAmount())
+							{
+								if(_debug)
+								{
+									System.out.println("DEBUG: Not enough items");
+								}
+								result.add( testItem );
+							}
+						}
+						else
+						{
+							if(testItem.getAmount() > compare.getAmount())
+							{
+								if(_debug)
+								{
+									System.out.println("DEBUG: Not enough items");
+								}
+								result.add(testItem);
+								
+							}
+							
+						}
+						
+						checked = true;
+					}
+				}
+				
+				if(!checked)
+				{
+					result.add( testItem );
+				}
+			}
+		}
+		
+		
+		return result;
+	}
+	
+	/**
+	 * Exports stock we have into a .csv file
+	 * @param stock
+	 */
 	private void export(Vector<Item> stock)
 	{
 		PrintWriter writer = null;
@@ -518,6 +749,7 @@ public class Operator {
 		
 		Vector<String> priority = new Vector<String>();
 		priority.add("MERGE");
+		priority.add("CHECKIF");
 		priority.add("SORT");
 		
 		Vector<Action> sorted = new Vector<Action>();

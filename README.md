@@ -26,7 +26,7 @@ On command line, type "java -jar WarehouseManager.jar <option" to run. For comma
 Following actions are can be placed into config file. Unknown and duplicate operations will be ignored. Order are carried out in MERGE-SORT-OUTPUT order.
 
 * MERGE		Will merge all warehouse stocks into one file. Param tells which stock (INBOUND/OUTBOUND/STORAGE) are merged
-* SORT			Sorts merged stock. Param tells whenever we want list to be ascending or decending based on id
+* SORT		Sorts merged stock. Param tells whenever we want list to be ascending or decending based on id
 
 ## Notes
 --------------------------

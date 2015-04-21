@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE warehouse SYSTEM "Warehouse.dtd">
+<warehouse name="Provisional Containment Site-28">
+	<info>
+		<manager>Dr. Clef</manager>
+		<location>Site-28</location>
+	</info>
+	
+	<inbound>
+	</inbound>
+	
+	<outbound>
+		<product>
+			<id>8</id>
+			<name>SCP-1388</name>
+			<amount>5</amount>
+		</product>
+	</outbound>
+	
+	<storage> 
+		<product>
+			<id>5</id>
+			<name>SCP-602</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>6</id>
+			<name>SCP-1229</name>
+			<amount>6</amount>
+		</product>
+		<product>
+			<id>7</id>
+			<name>SCP-1669</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>8</id>
+			<name>SCP-1388</name>
+			<amount>5</amount>
+		</product>
+	</storage>
+</warehouse>

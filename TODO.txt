@@ -16,12 +16,10 @@ Item			-	Item class										DONE
 XML parsing		-	Parsing XML file to produce content			-	DONE
 XML validation	-	Validating XML file							-	DONE
 Actions			-	Commiting correct actions					-	DONE
-Output			-	Correct output based on input				-	50%
+Output			-	Correct output based on input				-	DONE
 XML to class	-	Produce classes from XML docs				-	DONE
 
 ACTIONS
 Command			-					Description							-		Attributes				-	Status
 MERGE			-	Merges stocks into single stock						-	INBOUND/OUTBOUND/STORAGE	-	DONE
 SORT			-	Sorts the stock either as ascending or decending	-	ASCENDING/DECENDING			-	DONE
-SORTBY			-	Sorts the stock based on column (default is id)		-	ID/NAME/AMOUNT				-	Not Done
-LIST			-	List stock as either per warehouse or all			-	ALL/WAREHOUSE				-	Not Done

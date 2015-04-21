@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE company SYSTEM "Company.dtd">
+<company>
+	<info>
+		<name>SCP Foundation</name>
+		<manager>O5 Committee</manager>
+		<location>Classified</location>
+	</info>
+	<warehouses>
+		<warehouse file="Location1.xml" />
+		<warehouse file="Location2.xml" />
+		<warehouse file="Location3.xml" />
+		<warehouse file="Location4.xml" />
+	</warehouses>
+	<actions>		
+		<act type="sort" att="decending" />
+		<act type="merge" att="outbound" />		
+	</actions>
+</company>

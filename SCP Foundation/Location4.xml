@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE warehouse SYSTEM "Warehouse.dtd">
+<warehouse name="Site-19">
+	<info>
+		<manager>Mr. Anderson</manager>
+		<location>Site-19</location>
+	</info>
+	
+	<inbound>
+		<product>
+			<id>12</id>
+			<name>SCP-806</name>
+			<amount>3</amount>
+		</product>
+	</inbound>
+	
+	<outbound>
+		<product>
+			<id>16</id>
+			<name>SCP-131</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>21</id>
+			<name>SCP-931</name>
+			<amount>5</amount>
+		</product>
+	</outbound>
+	
+	<storage> 
+		<product>
+			<id>15</id>
+			<name>SCP-055</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>16</id>
+			<name>SCP-131</name>
+			<amount>2</amount>
+		</product>
+		<product>
+			<id>17</id>
+			<name>SCP-055</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>18</id>
+			<name>SCP-173</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>19</id>
+			<name>SCP-387</name>
+			<amount>9001</amount>
+		</product>
+		<product>
+			<id>20</id>
+			<name>SCP-668</name>
+			<amount>1</amount>
+		</product>
+		<product>
+			<id>21</id>
+			<name>SCP-931</name>
+			<amount>31</amount>
+		</product>
+	</storage>
+</warehouse>
